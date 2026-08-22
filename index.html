@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreelanceDZ - Plateforme des Freelances Algériens</title>
+    <meta name="description" content="Trouvez les meilleurs freelances et opportunités de travail en Algérie. Paiements locaux par BaridiMob et CCP.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo" id="nav-logo">
+                <span class="logo-accent">Freelance</span>DZ
+            </a>
+            <nav class="nav-links">
+                <a href="#explore" class="active" id="link-explore"><i class="fa-solid fa-briefcase"></i> Explorer</a>
+                <a href="#dashboard" id="link-dashboard"><i class="fa-solid fa-chart-line"></i> Tableau de bord</a>
+                <button class="btn btn-secondary btn-sm" id="btn-login-modal">Connexion</button>
+                <button class="btn btn-primary btn-sm" id="btn-signup-modal">S'inscrire</button>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="#explore" class="active" id="mlink-explore"><i class="fa-solid fa-briefcase"></i> Explorer</a>
+        <a href="#dashboard" id="mlink-dashboard"><i class="fa-solid fa-chart-line"></i> Tableau de bord</a>
+        <div class="mobile-nav-buttons">
+            <button class="btn btn-secondary w-full" id="btn-login-mobile">Connexion</button>
+            <button class="btn btn-primary w-full" id="btn-signup-mobile">S'inscrire</button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="main-content">
+        <!-- Landing View Group -->
+        <div id="landing-view">
+            <!-- Hero Section -->
+            <section class="hero-section" id="hero">
+                <div class="hero-container">
+                    <span class="hero-badge">Plateforme 100% Algérienne 🇩🇿</span>
+                    <h1>Trouvez le Freelance Idéal ou Votre Prochain Contrat en <span class="gradient-text">Algérie</span></h1>
+                    <p>La première plateforme reliant les talents algériens aux recruteurs. Simplifié pour les paiements locaux via BaridiMob, CCP et cash.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-lg" id="hero-btn-hire">Recruter un Talent</button>
+                        <button class="btn btn-secondary btn-lg" id="hero-btn-work">Trouver du Travail</button>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <h3>5,000+</h3>
+                        <p>Freelances Actifs</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>1,200+</h3>
+                        <p>Projets Publiés</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>BaridiMob</h3>
+                        <p>Paiement Simplifié</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Feed / Search Section -->
+            <section class="feed-section" id="explore-section">
+                <div class="section-header">
+                    <h2>Projets Récents</h2>
+                    <p>Découvrez les opportunités de projets postés récemment en Algérie.</p>
+                </div>
+                <div class="search-filter-bar">
+                    <div class="search-input-wrapper">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="job-search" placeholder="Rechercher un projet, une technologie...">
+                    </div>
+                    <select id="category-filter" class="filter-select">
+                        <option value="all">Toutes les catégories</option>
+                        <option value="dev">Développement & Tech</option>
+                        <option value="design">Design & Création</option>
+                        <option value="writing">Rédaction & Traduction</option>
+                        <option value="marketing">Marketing & Comm</option>
+                    </select>
+                </div>
+
+                <!-- Jobs Grid -->
+                <div class="jobs-grid" id="jobs-container">
+                    <!-- Fallback Loading State / Initial UI -->
+                    <div class="loading-state">
+                        <i class="fa-solid fa-spinner fa-spin"></i> Chargement des projets...
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Dashboard View Group -->
+        <div id="dashboard-view-wrapper" class="dashboard-wrapper hidden">
+            <div class="dashboard-container">
+                <!-- Sidebar -->
+                <aside class="db-sidebar">
+                    <div class="db-user-profile">
+                        <div class="avatar" id="db-user-avatar">-</div>
+                        <div class="user-info">
+                            <h4 id="db-user-name">Mon Compte</h4>
+                            <span>Freelancer 🇩🇿</span>
+                        </div>
+                    </div>
+                    <nav class="db-nav">
+                        <a href="#dashboard" class="db-nav-link active" id="db-link-overview"><i class="fa-solid fa-house"></i> Vue d'ensemble</a>
+                        <a href="#dashboard/clients" class="db-nav-link" id="db-link-clients"><i class="fa-solid fa-users"></i> Mes Clients</a>
+                        <a href="#dashboard/settings" class="db-nav-link" id="db-link-settings"><i class="fa-solid fa-gears"></i> Paramètres</a>
+                        <a href="#" class="db-nav-link" id="btn-logout"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a>
+                    </nav>
+                </aside>
+
+                <!-- Dashboard Content Area -->
+                <div class="db-content">
+                    <!-- Vue d'ensemble Panel -->
+                    <div id="panel-overview" class="db-panel">
+                        <!-- Header -->
+                        <header class="db-header">
+                            <div>
+                                <h2>Tableau de bord</h2>
+                                <p class="text-muted">Bienvenue dans votre espace personnel FreelanceDZ.</p>
+                            </div>
+                            <div class="db-header-actions">
+                                <button class="btn btn-primary btn-sm" id="btn-new-invoice"><i class="fa-solid fa-file-invoice"></i> Nouvelle Facture</button>
+                                <span class="db-date"><i class="fa-regular fa-calendar"></i> Juillet 2026</span>
+                            </div>
+                        </header>
+
+                        <!-- Metrics Grid -->
+                        <div class="metrics-grid">
+                            <!-- Revenue -->
+                            <div class="metric-card">
+                                <div class="metric-icon val-revenue"><i class="fa-solid fa-wallet"></i></div>
+                                <div class="metric-data">
+                                    <span>Revenu Total</span>
+                                    <h3 id="stat-revenue">0 DA</h3>
+                                </div>
+                            </div>
+                            <!-- Expenses -->
+                            <div class="metric-card">
+                                <div class="metric-icon val-expenses"><i class="fa-solid fa-receipt"></i></div>
+                                <div class="metric-data">
+                                    <span>Dépenses</span>
+                                    <h3 id="stat-expenses">0 DA</h3>
+                                </div>
+                            </div>
+                            <!-- Profit -->
+                            <div class="metric-card">
+                                <div class="metric-icon val-profit"><i class="fa-solid fa-scale-balanced"></i></div>
+                                <div class="metric-data">
+                                    <span>Bénéfice Net</span>
+                                    <h3 id="stat-profit">0 DA</h3>
+                                </div>
+                            </div>
+                            <!-- Unpaid Invoices -->
+                            <div class="metric-card">
+                                <div class="metric-icon val-unpaid"><i class="fa-solid fa-hourglass-half"></i></div>
+                                <div class="metric-data">
+                                    <span>Factures Impayées</span>
+                                    <h3 id="stat-unpaid">0 DA</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visual Layout: Chart & Invoices Grid -->
+                        <div class="db-details-layout">
+                            <!-- Revenue Chart Placeholder -->
+                            <div class="db-chart-section">
+                                <div class="card-header">
+                                    <h3>Évolution des Revenus</h3>
+                                    <span>Derniers 6 mois (DA)</span>
+                                </div>
+                                <div class="simple-chart-container" id="db-chart-container">
+                                    <!-- Dynamic bars loaded in JS -->
+                                </div>
+                            </div>
+
+                            <!-- Recent Invoices Table -->
+                            <div class="db-table-section">
+                                <div class="card-header">
+                                    <h3>Factures Récentes</h3>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="db-table">
+                                        <thead>
+                                            <tr>
+                                                <th>N° Facture</th>
+                                                <th>Client</th>
+                                                <th>Date</th>
+                                                <th>Montant</th>
+                                                <th>Mode</th>
+                                                <th>Statut</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="db-invoices-body">
+                                            <!-- Dynamically populated -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clients CRUD Panel -->
+                    <div id="panel-clients" class="db-panel hidden">
+                        <header class="db-header">
+                            <div>
+                                <h2>Mes Clients</h2>
+                                <p class="text-muted">Gérez la liste de vos clients et partenaires.</p>
+                            </div>
+                            <div class="db-header-actions">
+                                <button class="btn btn-primary btn-sm" id="btn-add-client"><i class="fa-solid fa-plus"></i> Nouveau Client</button>
+                            </div>
+                        </header>
+
+                        <!-- Clients Search bar -->
+                        <div class="search-filter-bar" style="margin-top: 16px; margin-bottom: 16px;">
+                            <div class="search-input-wrapper" style="max-width: 360px;">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="client-search" placeholder="Rechercher un client par nom...">
+                            </div>
+                        </div>
+
+                        <!-- Clients Table -->
+                        <div class="db-table-section w-full" style="background-color: var(--bg-card); padding: 24px; border-radius: var(--radius-md);">
+                            <div class="table-responsive">
+                                <table class="db-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nom du Client</th>
+                                            <th>Email</th>
+                                            <th>Téléphone</th>
+                                            <th style="text-align: right;">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="db-clients-body">
+                                        <!-- Dynamically populated -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Panel -->
+                    <div id="panel-settings" class="db-panel hidden">
+                        <header class="db-header">
+                            <div>
+                                <h2>Paramètres du Profil</h2>
+                                <p class="text-muted">Gérez vos informations de compte.</p>
+                            </div>
+                        </header>
+                        <div style="display: flex; flex-direction: column; gap: 24px; max-width: 500px; margin-top: 16px;">
+                            <div class="db-table-section w-full" style="background-color: var(--bg-card); padding: 32px; border-radius: var(--radius-md);">
+                                <h3 style="font-size: 1.1rem; color: var(--primary); margin-bottom: 16px;"><i class="fa-solid fa-user-gear"></i> Informations Personnelles</h3>
+                                <form id="settings-form" class="modal-form">
+                                    <div class="form-group">
+                                        <label for="settings-username">Nom d'utilisateur / Entreprise</label>
+                                        <input type="text" id="settings-username" required placeholder="Votre nom">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="settings-email">Email</label>
+                                        <input type="email" id="settings-email" required placeholder="nom@exemple.dz">
+                                    </div>
+                                    <div class="form-error hidden" id="settings-error"></div>
+                                    <div class="form-success hidden" id="settings-success" style="color: #22c55e; background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); padding: 12px; border-radius: var(--radius-sm); font-size: 0.85rem; text-align: center; margin-bottom: 10px;">Modifications enregistrées avec succès.</div>
+                                    <button type="submit" class="btn btn-primary w-full">Enregistrer les modifications</button>
+                                </form>
+                            </div>
+
+                            <div class="db-table-section w-full" style="background-color: var(--bg-card); padding: 32px; border-radius: var(--radius-md);">
+                                <h3 style="font-size: 1.1rem; color: var(--primary); margin-bottom: 16px;"><i class="fa-solid fa-key"></i> Modifier le mot de passe</h3>
+                                <form id="password-form" class="modal-form">
+                                    <div class="form-group">
+                                        <label for="current-password">Mot de passe actuel</label>
+                                        <input type="password" id="current-password" required placeholder="••••••••">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new-password">Nouveau mot de passe</label>
+                                        <input type="password" id="new-password" required placeholder="••••••••">
+                                    </div>
+                                    <div class="form-error hidden" id="password-error"></div>
+                                    <div class="form-success hidden" id="password-success" style="color: #22c55e; background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); padding: 12px; border-radius: var(--radius-sm); font-size: 0.85rem; text-align: center; margin-bottom: 10px;">Mot de passe modifié avec succès.</div>
+                                    <button type="submit" class="btn btn-primary w-full">Mettre à jour le mot de passe</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recruit View Group -->
+        <div id="recruit-view" class="feed-section hidden">
+            <div class="section-header">
+                <h2>Recruter un Talent 🇩🇿</h2>
+                <p class="text-muted">Découvrez nos freelances algériens qualifiés inscrits sur la plateforme.</p>
+            </div>
+            <div class="jobs-grid" id="freelancers-container">
+                <!-- Dynamically loaded freelancers -->
+            </div>
+        </div>
+
+        <!-- Find Work View Group -->
+        <div id="find-work-view" class="feed-section hidden">
+            <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <div>
+                    <h2>Trouver du Travail 💼</h2>
+                    <p class="text-muted">Explorez les missions proposées par les recruteurs locaux.</p>
+                </div>
+                <button class="btn btn-primary btn-sm" id="btn-post-job-trigger"><i class="fa-solid fa-plus"></i> Publier une mission</button>
+            </div>
+            <div class="search-filter-bar" style="margin-top: 24px; margin-bottom: 24px;">
+                <div class="search-input-wrapper" style="max-width: 360px;">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="job-search-input" placeholder="Rechercher une mission...">
+                </div>
+            </div>
+            <div class="jobs-grid" id="jobs-list-container">
+                <!-- Dynamically loaded jobs -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo"><span class="logo-accent">Freelance</span>DZ</a>
+                <p>Propulsez vos projets en collaborant avec des professionnels locaux en Algérie.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Liens Utiles</h4>
+                <ul>
+                    <li><a href="#explore">Explorer les projets</a></li>
+                    <li><a href="#how">Comment ça marche</a></li>
+                    <li><a href="#terms">Conditions d'utilisation</a></li>
+                </ul>
+            </div>
+            <div class="footer-payment">
+                <h4>Modes de Règlement Supportés</h4>
+                <div class="payment-badges">
+                    <span class="badge-pay">BaridiMob 💳</span>
+                    <span class="badge-pay">CCP 🏦</span>
+                    <span class="badge-pay">Main à main 🤝</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 FreelanceDZ. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal-overlay hidden" id="login-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Connexion</h3>
+                <button class="modal-close" id="btn-close-login"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="login-form" class="modal-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required placeholder="nom@exemple.dz">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Mot de passe</label>
+                    <input type="password" id="login-password" required placeholder="••••••••">
+                </div>
+                <a href="#" id="link-forgot-password" style="font-size: 0.85rem; color: var(--primary); text-align: right; margin-top: -10px; margin-bottom: 10px; display: block; width: 100%;">Mot de passe oublié ?</a>
+                <div class="form-error hidden" id="login-error"></div>
+                <button type="submit" class="btn btn-primary w-full">Se connecter</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SIGNUP MODAL -->
+    <div class="modal-overlay hidden" id="signup-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Inscription</h3>
+                <button class="modal-close" id="btn-close-signup"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="signup-form" class="modal-form">
+                <div class="form-group">
+                    <label for="signup-username">Nom d'utilisateur / Entreprise</label>
+                    <input type="text" id="signup-username" required placeholder="ex: yacinedev">
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required placeholder="nom@exemple.dz">
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Mot de passe</label>
+                    <input type="password" id="signup-password" required placeholder="••••••••">
+                </div>
+                <div class="form-group">
+                    <label for="signup-role">Je suis un</label>
+                    <select id="signup-role" class="filter-select w-full" style="padding: 10px; margin-top: 5px;">
+                        <option value="freelancer">Freelancer cherche des projets</option>
+                        <option value="client_poster">Client cherche à recruter</option>
+                    </select>
+                </div>
+                <div class="form-error hidden" id="signup-error"></div>
+                <button type="submit" class="btn btn-primary w-full">Créer un compte</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CLIENT MODAL (ADD / EDIT) -->
+    <div class="modal-overlay hidden" id="client-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="client-modal-title">Nouveau Client</h3>
+                <button class="modal-close" id="btn-close-client"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="client-form" class="modal-form">
+                <input type="hidden" id="client-id">
+                <div class="form-group">
+                    <label for="client-name">Nom de l'entreprise / Client</label>
+                    <input type="text" id="client-name" required placeholder="ex: Mobilis">
+                </div>
+                <div class="form-group">
+                    <label for="client-email">Email de contact</label>
+                    <input type="email" id="client-email" placeholder="contact@client.dz">
+                </div>
+                <div class="form-group">
+                    <label for="client-phone">Téléphone</label>
+                    <input type="text" id="client-phone" placeholder="0550 12 34 56">
+                </div>
+                <div class="form-error hidden" id="client-error"></div>
+                <button type="submit" class="btn btn-primary w-full" id="btn-client-submit">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FORGOT PASSWORD MODAL -->
+    <div class="modal-overlay hidden" id="forgot-password-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Mot de passe oublié</h3>
+                <button class="modal-close" id="btn-close-forgot"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="forgot-password-form" class="modal-form">
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">Saisissez votre email. Un lien de réinitialisation sera généré pour votre environnement de développement.</p>
+                <div class="form-group">
+                    <label for="forgot-email">Email</label>
+                    <input type="email" id="forgot-email" required placeholder="nom@exemple.dz">
+                </div>
+                <div class="form-error hidden" id="forgot-error"></div>
+                
+                <!-- Local dev token preview link wrapper -->
+                <div id="dev-reset-link-wrapper" class="hidden" style="background-color: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.2); padding: 12px; border-radius: var(--radius-sm); margin-bottom: 10px; word-break: break-all;">
+                    <span style="font-size: 0.8rem; color: var(--primary); font-weight: 600;">Lien de développement généré :</span><br>
+                    <a href="#" id="dev-reset-link" style="font-size: 0.8rem; color: #fef08a; text-decoration: underline;">Lien</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-full" id="btn-forgot-submit">Générer le lien de reset</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- RESET PASSWORD MODAL -->
+    <div class="modal-overlay hidden" id="reset-password-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Réinitialiser le mot de passe</h3>
+                <button class="modal-close" id="btn-close-reset"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="reset-password-form" class="modal-form">
+                <input type="hidden" id="reset-token-input">
+                <div class="form-group">
+                    <label for="reset-new-password">Nouveau mot de passe</label>
+                    <input type="password" id="reset-new-password" required placeholder="••••••••">
+                </div>
+                <div class="form-error hidden" id="reset-error"></div>
+                <button type="submit" class="btn btn-primary w-full">Changer le mot de passe</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JOB PUBLISH MODAL -->
+    <div class="modal-overlay hidden" id="job-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Publier une mission</h3>
+                <button class="modal-close" id="btn-close-job"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="job-form" class="modal-form">
+                <div class="form-group">
+                    <label for="job-title">Titre du Projet</label>
+                    <input type="text" id="job-title" required placeholder="ex: Développement d'un site web E-Commerce">
+                </div>
+                <div class="form-group">
+                    <label for="job-description">Description de la mission</label>
+                    <input type="text" id="job-description" required placeholder="Décrivez les compétences recherchées...">
+                </div>
+                <div class="form-group">
+                    <label for="job-budget">Budget (DA)</label>
+                    <input type="number" id="job-budget" required placeholder="ex: 120000">
+                </div>
+                <div class="form-group">
+                    <label for="job-category">Catégorie</label>
+                    <select id="job-category" class="filter-select w-full" style="padding: 10px; margin-top: 5px;">
+                        <option value="dev">Développement & Tech</option>
+                        <option value="design">Design & Création</option>
+                        <option value="writing">Rédaction & Traduction</option>
+                        <option value="marketing">Marketing & Comm</option>
+                    </select>
+                </div>
+                <div class="form-error hidden" id="job-error"></div>
+                <button type="submit" class="btn btn-primary w-full">Publier la mission</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- INVOICE CREATE MODAL -->
+    <div class="modal-overlay hidden" id="invoice-modal">
+        <div class="modal-card" style="max-width: 560px;">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-file-invoice" style="color:var(--primary); margin-right:8px;"></i>Nouvelle Facture</h3>
+                <button class="modal-close" id="btn-close-invoice"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="invoice-form" class="modal-form">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                    <div class="form-group">
+                        <label for="invoice-number">N° Facture</label>
+                        <input type="text" id="invoice-number" placeholder="INV-2026-0001">
+                    </div>
+                    <div class="form-group">
+                        <label for="invoice-status">Statut</label>
+                        <select id="invoice-status" class="filter-select w-full" style="padding:10px; margin-top:5px;">
+                            <option value="En attente">En attente</option>
+                            <option value="Payée">Payée</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="invoice-client">Client *</label>
+                    <input type="text" id="invoice-client" required placeholder="Nom du client ou entreprise" list="clients-datalist" autocomplete="off">
+                    <datalist id="clients-datalist"></datalist>
+                </div>
+                <div class="form-group">
+                    <label for="invoice-description">Description / Objet</label>
+                    <input type="text" id="invoice-description" placeholder="ex: Développement site web, Prestation Mai 2026">
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                    <div class="form-group">
+                        <label for="invoice-amount">Montant (DA) *</label>
+                        <input type="number" id="invoice-amount" required placeholder="ex: 85000" min="1" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="invoice-payment">Mode de paiement</label>
+                        <select id="invoice-payment" class="filter-select w-full" style="padding:10px; margin-top:5px;">
+                            <option value="BaridiMob">BaridiMob</option>
+                            <option value="CCP">CCP</option>
+                            <option value="Espèces">Espèces</option>
+                            <option value="Virement">Virement</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                    <div class="form-group">
+                        <label for="invoice-date">Date d'émission *</label>
+                        <input type="date" id="invoice-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="invoice-due-date">Date d'échéance</label>
+                        <input type="date" id="invoice-due-date">
+                    </div>
+                </div>
+                <div class="form-error hidden" id="invoice-error"></div>
+                <button type="submit" class="btn btn-primary w-full">Créer la facture</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
